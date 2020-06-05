@@ -25,63 +25,73 @@
 # Waiting Time = Turnaround Time – Burst Time
 # Turnaround Time = Complete Time – Arrival Time
 
+import queue
+
 currentTime = 1
 
 class Process():
     def __init__(self, ID, CPU_Burst, arrivalTime, priority):
         self.ID = ID
         self.CPU_Burst = CPU_Burst
+        self.CPU_Burst_Minus = CPU_Burst
         self.Arrival_Time = arrivalTime
         self.Priority = priority
         self.Complete_Time = 0
         self.Waiting_Time = 0
         self.Turnaround_Time = 0
-        self.Done = False
 
 class FCFS():
     def __init__(self, processList, timeSlice):
         self.Process_List = processList
         self.Time_Slice = timeSlice
-        self.Gantt_Chart = ""
+        self.Gantt_Chart = "-"
         self.Running_Process = None
-        self.Waiting_Queue = []
-        self.Done_Queue = []
+        self.Waiting_Queue = queue.Queue()
+        self.Done_List = []
 
     def CheckProcess(self):
-        for process in self.Process_List:
-            if process.Arrival_Time <= currentTime:
-                self.Waiting_Queue.append(self.Process_List.pop(self.Process_List.index(process)))
+        for process in self.Process_List: # search the process list
+            if process.Arrival_Time <= currentTime: # if the process have arrived
+                self.Waiting_Queue.put(process) # put the process in the waiting queue
 
     def RunProcess(self):
-        if not self.Running_Process:
-            self.Running_Process = self.Waiting_Queue.pop(0)
-
-
-    def Start(self):
-        self.Process_List.sort(key=lambda process: (process.Arrival_Time, process.ID))
-        while self.ProcessList:
-            CheckProcess()
-            
+        if not self.Running_Process: # if there's no current running process 
+            self.Running_Process = self.Waiting_Queue.get() # get the first process in waiting queue
+        self.Running_Process.CPU_Burst_Minus -= 1 # run the process and minus the cpu bust time
+        self.Gantt_Chart += hex(self.Running_Process.ID)[2:].upper() # add the process ID in hexidecimal into the gantt chart string
+        if self.Running_Process.CPU_Burst_Minus == 0: # if the process has complete
+            self.Running_Process.Complete_Time = currentTime # assign the complete time
+            self.Running_Process.Turnaround_Time = self.Running_Process.Complete_Time - self.Running_Process.Arrival_Time # calculate the turnaround time
+            self.Running_Process.Waiting_Time = self.Running_Process.Turnaround_Time - self.Running_Process.CPU_Burst # calculate the waiting time
+            self.Done_List.append(self.Running_Process) # append the complete process into done list
+            self.Running_Process = None # set running process to none
 
     def Print(self):
-        print("==    FCFS==")
+        print("==    FCFS==") # print label
+        print(self.Gantt_Chart) # print gantt chart
+
+    def Start(self):
+        self.Process_List.sort(key=lambda process: (process.Arrival_Time, process.ID)) # sort the process first by arrival time second by process ID
+        while len(self.Done_List) < len(self.Process_List): # while length of done list is less than the length of process list
+            self.CheckProcess() # check the upcoming process
+            self.RunProcess() # run the current process or dispatch from waiting queue
+        return self.Done_List.sort(key=lambda process: process.ID) # return done list
 
 def ReadProcess(input, processList):
     input.readline() # read the labels
-    tempArray = input.readline().split()
-    while tempArray != []:
-        singleProcess = Process(int(tempArray[0]), int(tempArray[1]), int(tempArray[2]), int(tempArray[3]))
-        # print(singleProcess.ID, "\t", singleProcess.CPU_Burst, "\t", singleProcess.Arrival_Time, "\t", singleProcess.Priority)
-        processList.append(singleProcess)
-        tempArray = input.readline().split()
+    tempArray = input.readline().split() # split every variables
+    while tempArray != []: # while temp array is empty
+        singleProcess = Process(int(tempArray[0]), int(tempArray[1]), int(tempArray[2]), int(tempArray[3])) # assign the four values
+        processList.append(singleProcess) # append this process to process list
+        tempArray = input.readline().split() # read next process
 
 def main():
-    inputFile = open(input("Please enter the file name you want to simulate the scheduling...\n"), 'r')
-    method, timeSlice = [int(token) for token in inputFile.readline().split()]
-    processList = []
-    ReadProcess(inputFile, processList)
-    FCFS_Simulate = FCFS(processList, timeSlice)
-    FCFS_Result = FCFS_Simulate.Start()
+    inputFile = open(input("Please enter the file name you want to simulate the scheduling...\n"), 'r') # open file
+    method, timeSlice = [int(token) for token in inputFile.readline().split()] # read method and time slice
+    processList = [] # create an empty process list
+    ReadProcess(inputFile, processList) # read the processes
+    FCFS_Simulate = FCFS(processList, timeSlice) # create a new FCFS class
+    FCFS_Result = FCFS_Simulate.Start() # start the FCFS class and return the result
 
     
 
