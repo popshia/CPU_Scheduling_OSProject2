@@ -27,8 +27,6 @@
 
 import queue
 
-currentTime = 1
-
 class Process():
     def __init__(self, ID, CPU_Burst, arrivalTime, priority):
         self.ID = ID
@@ -48,11 +46,13 @@ class FCFS():
         self.Running_Process = None
         self.Waiting_Queue = queue.Queue()
         self.Done_List = []
+        self.Process_Quantity = len(processList)
+        self.Current_Time = 1
 
     def CheckProcess(self):
         for process in self.Process_List: # search the process list
-            if process.Arrival_Time <= currentTime: # if the process have arrived
-                self.Waiting_Queue.put(process) # put the process in the waiting queue
+            if process.Arrival_Time <= self.Current_Time: # if the process have arrived
+                self.Waiting_Queue.put(self.Process_List.pop(self.Process_List.index(process))) # put the process in the waiting queue
 
     def RunProcess(self):
         if not self.Running_Process: # if there's no current running process 
@@ -60,7 +60,7 @@ class FCFS():
         self.Running_Process.CPU_Burst_Minus -= 1 # run the process and minus the cpu bust time
         self.Gantt_Chart += hex(self.Running_Process.ID)[2:].upper() # add the process ID in hexidecimal into the gantt chart string
         if self.Running_Process.CPU_Burst_Minus == 0: # if the process has complete
-            self.Running_Process.Complete_Time = currentTime # assign the complete time
+            self.Running_Process.Complete_Time = self.Current_Time # assign the complete time
             self.Running_Process.Turnaround_Time = self.Running_Process.Complete_Time - self.Running_Process.Arrival_Time # calculate the turnaround time
             self.Running_Process.Waiting_Time = self.Running_Process.Turnaround_Time - self.Running_Process.CPU_Burst # calculate the waiting time
             self.Done_List.append(self.Running_Process) # append the complete process into done list
@@ -72,10 +72,12 @@ class FCFS():
 
     def Start(self):
         self.Process_List.sort(key=lambda process: (process.Arrival_Time, process.ID)) # sort the process first by arrival time second by process ID
-        while len(self.Done_List) < len(self.Process_List): # while length of done list is less than the length of process list
+        while len(self.Done_List) < self.Process_Quantity: # while length of done list is less than the length of process list
+            self.Current_Time += 1 # current time + 1
             self.CheckProcess() # check the upcoming process
             self.RunProcess() # run the current process or dispatch from waiting queue
-        return self.Done_List.sort(key=lambda process: process.ID) # return done list
+        self.Print() # print the gantt chart
+        self.Done_List.sort(key=lambda process: process.ID) # sort done list by PID
 
 def ReadProcess(input, processList):
     input.readline() # read the labels
@@ -91,9 +93,9 @@ def main():
     processList = [] # create an empty process list
     ReadProcess(inputFile, processList) # read the processes
     FCFS_Simulate = FCFS(processList, timeSlice) # create a new FCFS class
-    FCFS_Result = FCFS_Simulate.Start() # start the FCFS class and return the result
-
-    
+    FCFS_Simulate.Start() # start the FCFS class
+    for results in FCFS_Simulate.Done_List:
+        print(results.Waiting_Time, results.Turnaround_Time)
 
 if __name__ == "__main__":
     main()
