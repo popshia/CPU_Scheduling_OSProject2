@@ -250,10 +250,10 @@ def main():
         print("Waiting Time\nID      FCFS    RR      PSJF    NPSJF   Priority\n===========================================================")
         for index in range(len(processList)):
             print( index+1, "\t", FCFS_Simulate.Done_List[index].Waiting_Time, "\t", RR_Simulate.Done_List[index].Waiting_Time, "\t\t", NSJF_Simulate.Done_List[index].Waiting_Time )
-        print("Turnaround Time\nID      FCFS    RR      PSJF    NPSJF   Priority\n===========================================================")
+        print("===========================================================\n\nTurnaround Time\nID      FCFS    RR      PSJF    NPSJF   Priority\n===========================================================")
         for index in range(len(processList)):
             print( index+1, "\t", FCFS_Simulate.Done_List[index].Turnaround_Time, "\t", RR_Simulate.Done_List[index].Turnaround_Time, "\t\t", NSJF_Simulate.Done_List[index].Turnaround_Time )
-
+        print("===========================================================")
 
 if __name__ == "__main__":
     main()
