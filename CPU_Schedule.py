@@ -91,7 +91,7 @@ class FCFS(): # done
         self.Print() # print the gantt chart
         self.Done_List.sort(key=lambda process: process.ID) # sort done list by PID
 
-class RR(): # buggy
+class RR(): # still buggy
     def __init__(self, processList, timeSlice):
         self.Process_List = processList
         self.Time_Slice = timeSlice
@@ -219,7 +219,7 @@ class PSJF(): # done
         self.Print() # print the gantt chart
         self.Done_List.sort(key=lambda process: process.ID) # sort done list by PID
 
-class NSJF(): # done
+class NPSJF(): # done
     def __init__(self, processList):
         self.Process_List = processList
         self.Gantt_Chart = "-"
@@ -255,7 +255,7 @@ class NSJF(): # done
             self.Running_Process = None # set running process to none
 
     def Print(self):
-        print("==    NSJF==") # print label
+        print("==Non-PSJF==") # print label
         print(self.Gantt_Chart) # print gantt chart
 
     def Start(self):
@@ -269,7 +269,7 @@ class NSJF(): # done
         self.Print() # print the gantt chart
         self.Done_List.sort(key=lambda process: process.ID) # sort done list by PID
 
-class PP():
+class PP(): # done
     def __init__(self, processList):
         self.Process_List = processList
         self.Gantt_Chart = "-"
@@ -307,7 +307,7 @@ class PP():
         self.Running_Process.CPU_Burst_Minus -= 1 # run the process and minus the cpu bust time
         self.Running_Process.Has_Use_CPU = True # set this process has used CPU
         if self.Running_Process.ID <= 16: self.Gantt_Chart += hex(self.Running_Process.ID)[2:].upper() # add the process ID in hexidecimal into the gantt chart string <=16
-        else: self.Gantt_Chart += ord(self.Running_Process.ID+55) # add the process ID in hexidecimal into the gantt chart string >16
+        else: self.Gantt_Chart += chr(self.Running_Process.ID+55) # add the process ID in hexidecimal into the gantt chart string >16
         if self.Running_Process.CPU_Burst_Minus == 0: # if the process has complete
             self.Running_Process.Complete_Time = self.Current_Time # assign the complete time
             self.Running_Process.Turnaround_Time = self.Running_Process.Complete_Time - self.Running_Process.Arrival_Time # calculate the turnaround time
@@ -369,37 +369,37 @@ def main():
         PSJF_Simulate.Start() # start the PSJF class
         PrintResult(PSJF_Simulate.Done_List) # print results
     elif method == 4: # NSJF (Non-preemptive Shortest Job First)
-        NSJF_Process_List = copy.deepcopy(processList) # create a NSJF process list
-        NSJF_Simulate = NSJF(NSJF_Process_List) # create a new NSJF class
-        NSJF_Simulate.Start() # start the NJSF class
-        PrintResult(NSJF_Simulate.Done_List) # print results
+        NPSJF_Process_List = copy.deepcopy(processList) # create a NSJF process list
+        NPSJF_Simulate = NPSJF(NPSJF_Process_List) # create a new NSJF class
+        NPSJF_Simulate.Start() # start the NJSF class
+        PrintResult(NPSJF_Simulate.Done_List) # print results
     elif method == 5: # PP (Preemptive Priority)
         PP_Process_List = copy.deepcopy(processList) # create a PP process list
         PP_Simulate = PP(PP_Process_List)     # create a new PP class
         PP_Simulate.Start() # start the PP class
         PrintResult(PP_Simulate.Done_List) # print results
     elif method == 6: # ALL
-        FCFS_Process_List = copy.deepcopy(processList) # create a FCFS process list
-        RR_Process_List   = copy.deepcopy(processList) # create a RR process list
-        PSJF_Process_List = copy.deepcopy(processList) # create a PSJF process list
-        NSJF_Process_List = copy.deepcopy(processList) # create a NSJF process list
-        PP_Process_List   = copy.deepcopy(processList) # create a PP process list
-        FCFS_Simulate = FCFS(FCFS_Process_List) # create a new FCFS class
-        RR_Simulate   = RR(RR_Process_List, timeSlice)     # create a new RR class
-        PSJF_Simulate = PSJF(PSJF_Process_List) # create a new PSJF class
-        NSJF_Simulate = NSJF(NSJF_Process_List) # create a new NSJF class
-        PP_Simulate   = PP(PP_Process_List)     # create a new PP class
-        FCFS_Simulate.Start() # start the FCFS class
-        RR_Simulate.Start()   # start the FCFS class
-        PSJF_Simulate.Start() # start the PSJF class
-        NSJF_Simulate.Start() # start the NJSF class
-        PP_Simulate.Start()   # start the PP class
+        FCFS_Process_List  = copy.deepcopy(processList) # create a FCFS process list
+        RR_Process_List    = copy.deepcopy(processList) # create a RR process list
+        PSJF_Process_List  = copy.deepcopy(processList) # create a PSJF process list
+        NPSJF_Process_List = copy.deepcopy(processList) # create a NSJF process list
+        PP_Process_List    = copy.deepcopy(processList) # create a PP process list
+        FCFS_Simulate  = FCFS(FCFS_Process_List)        # create a new FCFS class
+        RR_Simulate    = RR(RR_Process_List, timeSlice) # create a new RR class
+        PSJF_Simulate  = PSJF(PSJF_Process_List)        # create a new PSJF class
+        NPSJF_Simulate = NPSJF(NPSJF_Process_List)      # create a new NSJF class
+        PP_Simulate    = PP(PP_Process_List)            # create a new PP class
+        FCFS_Simulate.Start()  # start the FCFS class
+        RR_Simulate.Start()    # start the FCFS class
+        PSJF_Simulate.Start()  # start the PSJF class
+        NPSJF_Simulate.Start() # start the NJSF class
+        PP_Simulate.Start()    # start the PP class
         # print results
         print("===========================================================\n")
         print("Waiting Time\nID      FCFS    RR      PSJF    NPSJF   Priority\n===========================================================")
-        for index in range(len(processList)): print( FCFS_Simulate.Done_List[index].ID, "\t", FCFS_Simulate.Done_List[index].Waiting_Time, "\t", RR_Simulate.Done_List[index].Waiting_Time, "\t", PSJF_Simulate.Done_List[index].Waiting_Time, "\t", NSJF_Simulate.Done_List[index].Waiting_Time, "\t", PP_Simulate.Done_List[index].Waiting_Time )
+        for index in range(len(processList)): print( FCFS_Simulate.Done_List[index].ID, "\t", FCFS_Simulate.Done_List[index].Waiting_Time, "\t", RR_Simulate.Done_List[index].Waiting_Time, "\t", PSJF_Simulate.Done_List[index].Waiting_Time, "\t", NPSJF_Simulate.Done_List[index].Waiting_Time, "\t", PP_Simulate.Done_List[index].Waiting_Time )
         print("===========================================================\n\nTurnaround Time\nID      FCFS    RR      PSJF    NPSJF   Priority\n===========================================================")
-        for index in range(len(processList)): print( FCFS_Simulate.Done_List[index].ID, "\t", FCFS_Simulate.Done_List[index].Turnaround_Time, "\t", RR_Simulate.Done_List[index].Turnaround_Time, "\t", PSJF_Simulate.Done_List[index].Turnaround_Time, "\t", NSJF_Simulate.Done_List[index].Turnaround_Time, "\t", PP_Simulate.Done_List[index].Turnaround_Time )
+        for index in range(len(processList)): print( FCFS_Simulate.Done_List[index].ID, "\t", FCFS_Simulate.Done_List[index].Turnaround_Time, "\t", RR_Simulate.Done_List[index].Turnaround_Time, "\t", PSJF_Simulate.Done_List[index].Turnaround_Time, "\t", NPSJF_Simulate.Done_List[index].Turnaround_Time, "\t", PP_Simulate.Done_List[index].Turnaround_Time )
         print("===========================================================")
 
 if __name__ == "__main__":
