@@ -41,20 +41,21 @@
     * 將function執行完的Gantt Chart, Waiting Time, Turnaround Time output到⼀個新的檔案（input檔名_output.txt）
 	
 3. 使⽤的資料結構
-	'''
-    class Process ( Process Data Structure )
-        * int: ID
-        * int: CPU_Burst
-        * int: CPU_Burst_Minus
-        * int: Arrival_Time
-        * int: Priority
-        * int: Time_Slice
-        * int: Complete_Time
-        * int: Waiting_Time
-        * int: Turnaround_Time
-        * boolean: Has_Use_CPU
-	'''
-	'''
+	```Python
+	class FCFS():
+    	def __init__(self, processList):
+        	self.Process_List = processList
+        	self.Gantt_Chart = "-"
+        	self.Running_Process = None
+        	self.Waiting_Queue = []
+        	self.Done_List = []
+        	self.Process_Quantity = len(processList)
+        	self.Current_Time = 1
+		def CheckProcess(self):
+		def RunProcess(self):
+		def Start():
+	```
+	```Python
     class FCFS ( FCFS_Simulate )
         * list: Process_List
         * string: Gantt_Chart
@@ -66,8 +67,8 @@
         * function: CheckProcess()
         * function: RunProcess()
         * function: Start()
-	'''
-	'''
+	```
+	```Python
     class RR ( RR_Simulate )
     	* list: Process_List
     	* int: Time_Slice
@@ -80,8 +81,8 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-	'''
-	'''
+	```
+	```Python
     class PSJF ( PSJF_Simulate )
     	* variable: Process_List
     	* variable: Gantt_Chart
@@ -93,8 +94,8 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-	'''
-	'''
+	```
+	```Python
     class NPSJF ( NPSJF_Simulate )
     	* variable: Process_List
     	* variable: Gantt_Chart
@@ -106,8 +107,8 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-	'''
-	'''
+	```
+	```Python
     class PP ( PP_Simulate )
     	* variable: Process_List
     	* variable: Gantt_Chart
@@ -119,7 +120,7 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-	'''
+	```
 
 4. 未完成的功能
   	* 無（全數完成）
