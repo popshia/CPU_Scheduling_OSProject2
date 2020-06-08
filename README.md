@@ -43,47 +43,47 @@
 3. 使⽤的資料結構
 	```Python
     class FCFS ( FCFS_Simulate ):
-        * list: Process_List
-        * string: Gantt_Chart
-        * Process: Running_Process
-        * list: Waiting_Queue
-        * list: Done_List
-        * int: Process_Quantity
-        * int: Current_Time
-        * function: CheckProcess()
-        * function: RunProcess()
-        * function: Start()
+		* list: Process_List
+		* string: Gantt_Chart
+		* Process: Running_Process
+		* list: Waiting_Queue
+		* list: Done_List
+		* int: Process_Quantity
+		* int: Current_Time
+		* function: CheckProcess()
+		* function: RunProcess()
+		* function: Start()
 	```
 	```Python
     class RR ( RR_Simulate ):
-    	* list: Process_List
-    	* int: Time_Slice
-    	* string: Gantt_Chart
-    	* Process: Running_Process
-    	* list: Waiting_Queue
-    	* list: Done_List
-    	* int: Process_Quantity
-    	* int: Current_Time
-    	* function: CheckProcess()
-    	* function: RunProcess()
-    	* function: Start()
+		* list: Process_List
+		* int: Time_Slice
+		* string: Gantt_Chart
+		* Process: Running_Process
+		* list: Waiting_Queue
+		* list: Done_List
+		* int: Process_Quantity
+		* int: Current_Time
+		* function: CheckProcess()
+		* function: RunProcess()
+		* function: Start()
 	```
 	```Python
     class PSJF ( PSJF_Simulate ):
-    	* variable: Process_List
-    	* variable: Gantt_Chart
-    	* variable: Running_Process
-    	* variable: Waiting_Queue
-    	* variable: Done_List
-    	* variable: Process_Quantity
-    	* variable: Current_Time
-    	* function: CheckProcess()
-    	* function: RunProcess()
-    	* function: Start()
+		* variable: Process_List
+		* variable: Gantt_Chart
+		* variable: Running_Process
+		* variable: Waiting_Queue
+		* variable: Done_List
+		* variable: Process_Quantity
+		* variable: Current_Time
+		* function: CheckProcess()
+		* function: RunProcess()
+		* function: Start()
 	```
 	```Python
     class NPSJF ( NPSJF_Simulate ):
-    	* variable: Process_List
+		* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
     	* variable: Waiting_Queue
