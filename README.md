@@ -41,7 +41,8 @@
     * 將function執行完的Gantt Chart, Waiting Time, Turnaround Time output到⼀個新的檔案（input檔名_output.txt）
 	
 3. 使⽤的資料結構
-    # class Process ( Process Data Structure )
+	'''
+    class Process ( Process Data Structure )
         * int: ID
         * int: CPU_Burst
         * int: CPU_Burst_Minus
@@ -52,7 +53,9 @@
         * int: Waiting_Time
         * int: Turnaround_Time
         * boolean: Has_Use_CPU
-    # class FCFS ( FCFS_Simulate )
+	'''
+	'''
+    class FCFS ( FCFS_Simulate )
         * list: Process_List
         * string: Gantt_Chart
         * Process: Running_Process
@@ -63,7 +66,9 @@
         * function: CheckProcess()
         * function: RunProcess()
         * function: Start()
-    # class RR ( RR_Simulate )
+	'''
+	'''
+    class RR ( RR_Simulate )
     	* list: Process_List
     	* int: Time_Slice
     	* string: Gantt_Chart
@@ -75,7 +80,9 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-    # class PSJF ( PSJF_Simulate )
+	'''
+	'''
+    class PSJF ( PSJF_Simulate )
     	* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
@@ -86,7 +93,9 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-    # class NPSJF ( NPSJF_Simulate )
+	'''
+	'''
+    class NPSJF ( NPSJF_Simulate )
     	* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
@@ -97,7 +106,9 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
-    # class PP ( PP_Simulate )
+	'''
+	'''
+    class PP ( PP_Simulate )
     	* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
@@ -108,6 +119,7 @@
     	* function: CheckProcess()
     	* function: RunProcess()
     	* function: Start()
+	'''
 
 4. 未完成的功能
   	* 無（全數完成）
