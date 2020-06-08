@@ -42,21 +42,7 @@
 	
 3. 使⽤的資料結構
 	```Python
-	class FCFS():
-    	def __init__(self, processList):
-        	self.Process_List = processList
-        	self.Gantt_Chart = "-"
-        	self.Running_Process = None
-        	self.Waiting_Queue = []
-        	self.Done_List = []
-        	self.Process_Quantity = len(processList)
-        	self.Current_Time = 1
-		def CheckProcess(self):
-		def RunProcess(self):
-		def Start():
-	```
-	```Python
-    class FCFS ( FCFS_Simulate )
+    class FCFS ( FCFS_Simulate ):
         * list: Process_List
         * string: Gantt_Chart
         * Process: Running_Process
@@ -69,7 +55,7 @@
         * function: Start()
 	```
 	```Python
-    class RR ( RR_Simulate )
+    class RR ( RR_Simulate ):
     	* list: Process_List
     	* int: Time_Slice
     	* string: Gantt_Chart
@@ -83,7 +69,7 @@
     	* function: Start()
 	```
 	```Python
-    class PSJF ( PSJF_Simulate )
+    class PSJF ( PSJF_Simulate ):
     	* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
@@ -96,7 +82,7 @@
     	* function: Start()
 	```
 	```Python
-    class NPSJF ( NPSJF_Simulate )
+    class NPSJF ( NPSJF_Simulate ):
     	* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
@@ -109,7 +95,7 @@
     	* function: Start()
 	```
 	```Python
-    class PP ( PP_Simulate )
+    class PP ( PP_Simulate ):
     	* variable: Process_List
     	* variable: Gantt_Chart
     	* variable: Running_Process
