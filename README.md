@@ -11,7 +11,7 @@
   * 再將檔案剩下的process讀入⼀個list
   * 根據method去做執⾏不同function
   	* 1：FCFS (First Come First Serve)\n
-			1. 先依arrival time排序所有process
+			* 先依arrival time排序所有process
 			2. 執行CheckProcess()將抵達的process放進Waiting_Queue
 			3. 執行RunProcess()dispatch並執行Waiting_Queue中的process
   	* 2：RR (Round Robin)
