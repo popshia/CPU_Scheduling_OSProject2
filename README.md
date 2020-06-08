@@ -63,51 +63,51 @@
         * function: CheckProcess()
         * function: RunProcess()
         * function: Start()
-  * class RR ( RR_Simulate )
-    * list: Process_List
-    * int: Time_Slice
-    * string: Gantt_Chart
-    * Process: Running_Process
-    * list: Waiting_Queue
-    * list: Done_List
-    * int: Process_Quantity
-    * int: Current_Time
-    * function: CheckProcess()
-    * function: RunProcess()
-    * function: Start()
-  * class PSJF ( PSJF_Simulate )
-    * variable: Process_List
-    * variable: Gantt_Chart
-    * variable: Running_Process
-    * variable: Waiting_Queue
-    * variable: Done_List
-    * variable: Process_Quantity
-    * variable: Current_Time
-    * function: CheckProcess()
-    * function: RunProcess()
-    * function: Start()
-  * class NPSJF ( NPSJF_Simulate )
-    * variable: Process_List
-    * variable: Gantt_Chart
-    * variable: Running_Process
-    * variable: Waiting_Queue
-    * variable: Done_List
-    * variable: Process_Quantity
-    * variable: Current_Time
-    * function: CheckProcess()
-    * function: RunProcess()
-    * function: Start()
-  * class PP ( PP_Simulate )
-    * variable: Process_List
-    * variable: Gantt_Chart
-    * variable: Running_Process
-    * variable: Waiting_Queue
-    * variable: Done_List
-    * variable: Process_Quantity
-    * variable: Current_Time
-    * function: CheckProcess()
-    * function: RunProcess()
-    * function: Start()
+    * class RR ( RR_Simulate )
+    	* list: Process_List
+    	* int: Time_Slice
+    	* string: Gantt_Chart
+    	* Process: Running_Process
+    	* list: Waiting_Queue
+    	* list: Done_List
+    	* int: Process_Quantity
+    	* int: Current_Time
+    	* function: CheckProcess()
+    	* function: RunProcess()
+    	* function: Start()
+    * class PSJF ( PSJF_Simulate )
+    	* variable: Process_List
+    	* variable: Gantt_Chart
+    	* variable: Running_Process
+    	* variable: Waiting_Queue
+    	* variable: Done_List
+    	* variable: Process_Quantity
+    	* variable: Current_Time
+    	* function: CheckProcess()
+    	* function: RunProcess()
+    	* function: Start()
+    * class NPSJF ( NPSJF_Simulate )
+    	* variable: Process_List
+    	* variable: Gantt_Chart
+    	* variable: Running_Process
+    	* variable: Waiting_Queue
+    	* variable: Done_List
+    	* variable: Process_Quantity
+    	* variable: Current_Time
+    	* function: CheckProcess()
+    	* function: RunProcess()
+    	* function: Start()
+    * class PP ( PP_Simulate )
+    	* variable: Process_List
+    	* variable: Gantt_Chart
+    	* variable: Running_Process
+    	* variable: Waiting_Queue
+    	* variable: Done_List
+    	* variable: Process_Quantity
+    	* variable: Current_Time
+    	* function: CheckProcess()
+    	* function: RunProcess()
+    	* function: Start()
 
 4. 未完成的功能
-  * 無（全數完成）
+  	* 無（全數完成）
