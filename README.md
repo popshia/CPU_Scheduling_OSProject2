@@ -70,42 +70,42 @@
 	```
 	```Python
     class PSJF ( PSJF_Simulate ):
-		* variable: Process_List
-		* variable: Gantt_Chart
-		* variable: Running_Process
-		* variable: Waiting_Queue
-		* variable: Done_List
-		* variable: Process_Quantity
-		* variable: Current_Time
+		* list: Process_List
+		* string: Gantt_Chart
+		* Process: Running_Process
+		* list: Waiting_Queue
+		* list: Done_List
+		* int: Process_Quantity
+		* int: Current_Time
 		* function: CheckProcess()
 		* function: RunProcess()
 		* function: Start()
 	```
 	```Python
     class NPSJF ( NPSJF_Simulate ):
-		* variable: Process_List
-    	* variable: Gantt_Chart
-    	* variable: Running_Process
-    	* variable: Waiting_Queue
-    	* variable: Done_List
-    	* variable: Process_Quantity
-    	* variable: Current_Time
-    	* function: CheckProcess()
-    	* function: RunProcess()
-    	* function: Start()
+		* list: Process_List
+		* string: Gantt_Chart
+		* Process: Running_Process
+		* list: Waiting_Queue
+		* list: Done_List
+		* int: Process_Quantity
+		* int: Current_Time
+		* function: CheckProcess()
+		* function: RunProcess()
+		* function: Start()
 	```
 	```Python
     class PP ( PP_Simulate ):
-    	* variable: Process_List
-    	* variable: Gantt_Chart
-    	* variable: Running_Process
-    	* variable: Waiting_Queue
-    	* variable: Done_List
-    	* variable: Process_Quantity
-    	* variable: Current_Time
-    	* function: CheckProcess()
-    	* function: RunProcess()
-    	* function: Start()
+		* list: Process_List
+		* string: Gantt_Chart
+		* Process: Running_Process
+		* list: Waiting_Queue
+		* list: Done_List
+		* int: Process_Quantity
+		* int: Current_Time
+		* function: CheckProcess()
+		* function: RunProcess()
+		* function: Start()
 	```
 
 4. 未完成的功能
