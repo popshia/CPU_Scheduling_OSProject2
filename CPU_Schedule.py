@@ -234,7 +234,7 @@ class PP(): # done
         for process in self.Process_List: # search the process list
             if process.Arrival_Time <= self.Current_Time: # if the process have arrived
                 if self.Running_Process: # if there's a current running process
-                    if process.Priority <= self.Running_Process.Priority: # if the upcoming process cpu burst is smaller or equal to the current running process
+                    if process.Priority < self.Running_Process.Priority: # if the upcoming process cpu burst is smaller or equal to the current running process
                         self.Waiting_Queue.append(self.Running_Process) # append the current running process
                         self.Running_Process = process # snatched the current process
                     else: # if the upcoming process cpu burst is greater to the current running process
