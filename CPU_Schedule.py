@@ -1,4 +1,7 @@
-# Method Description:
+# OS Project 2: CPU Scheduling
+# 10627130 資訊三甲 林冠良
+# DEAD LINE -> 6/12
+
 # 1: FCFS ( First Come First Serve )
 #   • 依arrival time先後次序處理
 #   • 若arrival time相同時，則依ProcessID由小至大依序處理。
@@ -20,12 +23,7 @@
 #   • 依Priority由大致小依序處理
 #   • 若Priority相同，讓沒有用過CPU的先使用，無法分別時則依arrival time小的先處理
 #   • 若Priority及arrival time均相同，則依ProcessID由小至大依序處理。
-# 6: ALL
 
-# Waiting Time = Turnaround Time – Burst Time
-# Turnaround Time = Complete Time – Arrival Time
-
-import queue
 import copy
 from collections import deque
 
@@ -91,33 +89,35 @@ class FCFS(): # done
         self.Print() # print the gantt chart
         self.Done_List.sort(key=lambda process: process.ID) # sort done list by PID
 
-class RR(): # still buggy
+class RR(): # done
     def __init__(self, processList, timeSlice):
         self.Process_List = processList
         self.Time_Slice = timeSlice
         self.Gantt_Chart = "-"
         self.Running_Process = None
-        self.Waiting_Queue = deque()
+        self.Waiting_Queue = []
         self.Done_List = []
         self.Process_Quantity = len(processList)
         self.Current_Time = 1
-        self.Time_Out = False
 
     def CheckProcess(self):
         for process in self.Process_List: # search the process list
             if process.Arrival_Time <= self.Current_Time: # if the process have arrived
-                if self.Time_Out: # if there's time out
-                    self.Waiting_Queue.appendleft(self.Process_List.pop(self.Process_List.index(process))) # put the process in the front of the waiting queue
-                else: # if there's no time out
-                    self.Waiting_Queue.append(self.Process_List.pop(self.Process_List.index(process))) # put the process in the waiting queue
-        self.Time_Out = False # reset time out boolean
+                self.Waiting_Queue.append(process) # put the process in the waiting queue
+        for waiting in self.Waiting_Queue: # search through the waiting queue
+            try: # try to remove the past copied process
+                self.Process_List.pop(self.Process_List.index(waiting)) # if yes, pop out
+            except: pass # if can't find
+        if self.Running_Process and self.Running_Process.Time_Slice == 0:
+            self.Running_Process.Time_Slice = self.Time_Slice # reset the time slice
+            self.Waiting_Queue.append(self.Running_Process) # put the process back to the waiting queue
+            self.Running_Process = None # set running process to none
 
     def RunProcess(self):
         if not self.Running_Process: # if there's no current running process
             if len(self.Waiting_Queue) > 0: # if there's next process in queue
-                self.Running_Process = self.Waiting_Queue.popleft() # get the first process in waiting queue
-            else: # if there's no more process in queue
-                return # return
+                self.Running_Process = self.Waiting_Queue.pop(0) # get the first process in waiting queue
+            else: return # if there's no more process in queue
         self.Running_Process.CPU_Burst_Minus -= 1 # run the process and minus the cpu burst time
         self.Running_Process.Time_Slice -= 1 # minus the time slice by one
         if self.Running_Process.ID <= 16: self.Gantt_Chart += hex(self.Running_Process.ID)[2:].upper() # add the process ID in hexidecimal into the gantt chart string <=16
@@ -129,14 +129,8 @@ class RR(): # still buggy
                 self.Running_Process.Waiting_Time = self.Running_Process.Turnaround_Time - self.Running_Process.CPU_Burst # calculate the waiting time
                 self.Done_List.append(self.Running_Process) # append the complete process into done list
                 self.Running_Process = None # set running process to none
-                self.Time_Out = True
                 return # return
-            else: # if the process hasn't complete
-                self.Running_Process.Time_Slice = self.Time_Slice # reset the time slice
-                self.Waiting_Queue.append(self.Running_Process) # put the process back to the waiting queue
-                self.Running_Process = None # set running process to none
-                self.Time_Out = True
-                return # return
+            return # else return
         if self.Running_Process.CPU_Burst_Minus == 0: # if the process has complete
             self.Running_Process.Complete_Time = self.Current_Time # assign the complete time
             self.Running_Process.Turnaround_Time = self.Running_Process.Complete_Time - self.Running_Process.Arrival_Time # calculate the turnaround time
@@ -172,7 +166,7 @@ class PSJF(): # done
         for process in self.Process_List: # search the process list
             if process.Arrival_Time <= self.Current_Time: # if the process have arrived
                 if self.Running_Process: # if there's a current running process
-                    if process.CPU_Burst_Minus <= self.Running_Process.CPU_Burst_Minus: # if the upcoming process cpu burst is smaller or equal to the current running process
+                    if process.CPU_Burst_Minus < self.Running_Process.CPU_Burst_Minus: # if the upcoming process cpu burst is smaller or equal to the current running process
                         self.Waiting_Queue.append(self.Running_Process) # append the current running process
                         self.Running_Process = process # snatched the current process
                     else: # if the upcoming process cpu burst is greater to the current running process
@@ -348,7 +342,7 @@ def PrintResult(doneList):
 
 def main():
     #inputFile = open(input("Please enter the file name you want to simulate the scheduling...\n"), 'r') # open file
-    inputFile = open("input.txt", 'r')
+    inputFile = open("input3.txt", 'r')
     method, timeSlice = [int(token) for token in inputFile.readline().split()] # read method and time slice
     processList = [] # create an empty process list
     ReadProcess(inputFile, processList) # read the processes
