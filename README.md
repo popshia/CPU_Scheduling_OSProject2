@@ -17,9 +17,19 @@
   * 5：PP (Preemptive Priority)
   * 6：ALL Methods
   * 將function執行完的Gantt Chart, Waiting Time, Turnaround Time output到⼀個新的檔案（input檔名_output.txt）
+	
 3. 使⽤的資料結構
   * class Process ( Process Data Structure )
-    *
+    * ID
+    * CPU_Burst
+    * CPU_Burst_Minus
+    * Arrival_Time
+    * Priority
+    * Time_Slice
+    * Complete_Time
+    * Waiting_Time
+    * Turnaround_Time
+    * Has_Use_CPU
   * class FCFS ( FCFS_Simulate )
     *
   * queue.Queue()
